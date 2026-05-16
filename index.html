@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pragati's Task Manager</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo-icon">✓</div>
+      <div>
+        <h1 class="app-title">TaskFlow</h1>
+        <p class="app-subtitle" id="dateLabel">Loading...</p>
+      </div>
+    </div>
+    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
+      <span id="themeIcon">🌙</span>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- STATS ROW -->
+    <div class="stats-row">
+      <div class="stat-card stat-total">
+        <div class="stat-num" id="s-total">0</div>
+        <div class="stat-lbl">Total Tasks</div>
+      </div>
+      <div class="stat-card stat-done">
+        <div class="stat-num" id="s-done">0</div>
+        <div class="stat-lbl">Completed</div>
+      </div>
+      <div class="stat-card stat-high">
+        <div class="stat-num" id="s-high">0</div>
+        <div class="stat-lbl">High Priority</div>
+      </div>
+      <div class="stat-card stat-pending">
+        <div class="stat-num" id="s-pending">0</div>
+        <div class="stat-lbl">Remaining</div>
+      </div>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-section">
+      <div class="progress-label">
+        <span>Overall Progress</span>
+        <span id="progPct">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="prog"></div>
+      </div>
+    </div>
+
+    <!-- ADD TASK CARD -->
+    <div class="add-card">
+      <h2 class="add-card-title">Add New Task</h2>
+
+      <div class="input-main-row">
+        <input
+          type="text"
+          id="taskInput"
+          class="task-input"
+          placeholder="What needs to be done?"
+          onkeydown="if(event.key==='Enter') addTask()"
+        />
+        <button class="add-btn" onclick="addTask()">
+          <span>+</span> Add Task
+        </button>
+      </div>
+
+      <div class="input-options-row">
+
+        <!-- Due Date -->
+        <div class="option-group">
+          <label class="option-label">📅 Due Date</label>
+          <input type="date" id="dueDate" class="option-input" />
+        </div>
+
+        <!-- Category -->
+        <div class="option-group">
+          <label class="option-label">🏷️ Category</label>
+          <select id="catSelect" class="option-input">
+            <option value="general">General</option>
+            <option value="work">Work</option>
+            <option value="personal">Personal</option>
+            <option value="study">Study</option>
+            <option value="health">Health</option>
+            <option value="shopping">Shopping</option>
+          </select>
+        </div>
+
+        <!-- Priority -->
+        <div class="option-group">
+          <label class="option-label">🚦 Priority</label>
+          <div class="pri-selector">
+            <button class="pri-btn pri-high" id="pri-high" onclick="setPri('high')">High</button>
+            <button class="pri-btn pri-med active-pri" id="pri-med" onclick="setPri('med')">Medium</button>
+            <button class="pri-btn pri-low" id="pri-low" onclick="setPri('low')">Low</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEARCH + SORT -->
+    <div class="search-sort-row">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search tasks..."
+          oninput="render()"
+        />
+      </div>
+      <button class="sort-btn" onclick="cycleSort()">
+        <span>⇅</span> <span id="sortLabel">Sort: A–Z</span>
+      </button>
+    </div>
+
+    <!-- FILTER PILLS -->
+    <div class="filter-row">
+      <button class="filter-pill active" onclick="setFilter('all', this)">All</button>
+      <button class="filter-pill" onclick="setFilter('active', this)">Active</button>
+      <button class="filter-pill" onclick="setFilter('done', this)">Done</button>
+      <button class="filter-pill" onclick="setFilter('high', this)">🔴 High</button>
+      <button class="filter-pill" onclick="setFilter('work', this)">💼 Work</button>
+      <button class="filter-pill" onclick="setFilter('personal', this)">🙂 Personal</button>
+      <button class="filter-pill" onclick="setFilter('study', this)">📚 Study</button>
+      <button class="filter-pill" onclick="setFilter('health', this)">❤️ Health</button>
+    </div>
+
+    <!-- TASK LIST -->
+    <div class="list-header">
+      <span class="list-count" id="listCount">0 tasks</span>
+      <button class="clear-done-btn" onclick="clearDone()">🗑️ Clear Completed</button>
+    </div>
+
+    <div class="todo-list" id="todoList">
+      <!-- Tasks are rendered here by JavaScript -->
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    Built with HTML, CSS & JavaScript by Pragati 🚀
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
