@@ -114,6 +114,5 @@ This project is open source and available under the [MIT License](LICENSE).
 
 > ⭐ If you found this project helpful, please give it a star on GitHub!
 
-
-⭐ If you like this project, consider starring the repository.
+> If you like this project, consider starring the repository.
 ---
